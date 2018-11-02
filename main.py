@@ -3,26 +3,25 @@ from settings import (
     BAG_SIZE,
     MAX_ITENS,
     POPULATION_SIZE,
-    SELECTION_PERCENT
+    SELECTION_PERCENT,
+    MUTATION_PERCENT
 )
 from chromosome import Chromosome
-from utils import roulette_selection, crossover
+from utils import (
+    roulette_selection,
+    crossover,
+    chromosome_is_valid,
+    mutate
+)
 
 population = []
-
 
 while len(population) != POPULATION_SIZE:
     gene = [random.randint(0, 1) for i in range(MAX_ITENS)]
     c = Chromosome(gene)
-    if c.fitness[0] <= BAG_SIZE:
-        # print("{} added".format(c))
+
+    if chromosome_is_valid(c):
         population.append(c)
-    else:
-        # print("{} denied".format(c))
-        pass
-
-print('Population collected.')
-
 
 selected_population = []
 new_population = []
@@ -44,5 +43,12 @@ selected_population = zip(
 for x, y in selected_population:
     new_population.append(crossover(x.gene, y.gene))
     new_population.append(crossover(y.gene, x.gene))
+
+
+population_to_mutate = int((POPULATION_SIZE * MUTATION_PERCENT) / 100)
+
+for i in range(population_to_mutate):
+    new_population[random.randint(0, MAX_ITENS - 1)] = mutate(new_population[random.randint(0, MAX_ITENS - 1)].gene)
+
 
 print(new_population)
