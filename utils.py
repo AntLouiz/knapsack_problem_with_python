@@ -30,7 +30,7 @@ def crossover(x, y):
 
         son = Chromosome(son)
 
-        if son.fitness[0] > BAG_SIZE:
+        if (son.fitness[0] > BAG_SIZE) or (son.fitness[0] == 0):
             son = []
         else:
             break
