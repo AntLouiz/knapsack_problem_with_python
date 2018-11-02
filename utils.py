@@ -1,6 +1,6 @@
 import random
 from chromosome import Chromosome
-from settings import MAX_ITENS, BAG_SIZE, ITENS
+from settings import MAX_ITENS, BAG_SIZE
 
 
 def roulette_selection(population):
