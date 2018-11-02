@@ -1,6 +1,6 @@
 import random
 from chromosome import Chromosome
-from settings import MAX_ITENS, BAG_SIZE
+from settings import MAX_ITENS, BAG_SIZE, ITENS
 
 
 def roulette_selection(population):
@@ -60,5 +60,8 @@ def mutate(x):
 
         if chromosome_is_valid(mutated_chromosome):
             break
+
+        else:
+            mutated_gene = []
 
     return mutated_chromosome
