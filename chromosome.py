@@ -1,9 +1,5 @@
-import random
 import numpy as np
-from settings import TOTAL_ITENS_BENEFIT, MAX_ITENS
-
-
-itens = [[random.randint(1, MAX_ITENS), random.randint(1, TOTAL_ITENS_BENEFIT)] for i in range(MAX_ITENS)]
+from settings import MAX_ITENS, ITENS
 
 
 class Chromosome():
@@ -16,10 +12,10 @@ class Chromosome():
         total_size = 0
         total_benefit = 0
 
-        for i in range(len(self.gene)):
+        for i in range(MAX_ITENS):
             if self.gene[i]:
-                total_size += itens[i][0]
-                total_benefit += itens[i][1]
+                total_size += ITENS[i][0]
+                total_benefit += ITENS[i][1]
 
         return np.array([total_size, total_benefit])
 
