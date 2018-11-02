@@ -1,4 +1,6 @@
 import random
+from chromosome import Chromosome
+from settings import MAX_ITENS, BAG_SIZE
 
 
 def roulette_selection(population):
@@ -15,4 +17,22 @@ def roulette_selection(population):
 
 
 def crossover(x, y):
-    return 1
+    son = []
+
+    while len(son) == 0:
+        binary_mask = [random.randint(0, 1) for i in range(MAX_ITENS)]
+
+        for i in range(len(binary_mask)):
+            if binary_mask[i]:
+                son.append(x[i])
+            else:
+                son.append(y[i])
+
+        son = Chromosome(son)
+
+        if son.fitness[0] > BAG_SIZE:
+            son = []
+        else:
+            break
+
+    return son
