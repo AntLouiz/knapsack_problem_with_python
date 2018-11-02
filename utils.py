@@ -1,6 +1,11 @@
 import random
 from chromosome import Chromosome
 from settings import MAX_ITENS, BAG_SIZE
+from operator import attrgetter
+
+
+def best(population):
+    return max(population, key=attrgetter('fitness'))
 
 
 def roulette_selection(population):
