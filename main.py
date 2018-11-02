@@ -4,7 +4,8 @@ from settings import (
     MAX_ITENS,
     POPULATION_SIZE,
     SELECTION_PERCENT,
-    MUTATION_PERCENT
+    MUTATION_PERCENT,
+    MAX_ITERATION
 )
 from chromosome import Chromosome
 from utils import (
@@ -15,6 +16,7 @@ from utils import (
 )
 
 population = []
+generation = 1
 
 while len(population) != POPULATION_SIZE:
     gene = [random.randint(0, 1) for i in range(MAX_ITENS)]
@@ -23,8 +25,10 @@ while len(population) != POPULATION_SIZE:
     if chromosome_is_valid(c):
         population.append(c)
 
+
 selected_population = []
 new_population = []
+
 random_selecteds_size = POPULATION_SIZE - int((POPULATION_SIZE * SELECTION_PERCENT) / 100)
 
 for i in range(random_selecteds_size):
@@ -49,6 +53,5 @@ population_to_mutate = int((POPULATION_SIZE * MUTATION_PERCENT) / 100)
 
 for i in range(population_to_mutate):
     new_population[random.randint(0, MAX_ITENS - 1)] = mutate(new_population[random.randint(0, MAX_ITENS - 1)].gene)
-
 
 print(new_population)

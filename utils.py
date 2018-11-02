@@ -4,7 +4,7 @@ from settings import MAX_ITENS, BAG_SIZE
 
 
 def roulette_selection(population):
-    population_fitness = [p.fitness[0] for p in population]
+    population_fitness = [p.fitness for p in population]
     total_population_benefit = sum(population_fitness)
     random_number = random.randint(0, total_population_benefit)
     selected_position = 0
@@ -30,7 +30,7 @@ def crossover(x, y):
 
         son = Chromosome(son)
 
-        if (son.fitness[0] > BAG_SIZE) or (son.fitness[0] == 0):
+        if (son.total_size > BAG_SIZE) or (son.total_size == 0):
             son = []
         else:
             break
@@ -39,7 +39,7 @@ def crossover(x, y):
 
 
 def chromosome_is_valid(chromosome):
-    if chromosome.fitness[0] <= BAG_SIZE:
+    if chromosome.total_size <= BAG_SIZE:
         return True
     else:
         return False
