@@ -1,3 +1,5 @@
+import random
+
 BAG_SIZE = 10
 MAX_ITENS = 7
 TOTAL_ITENS_SIZE = 8
@@ -7,3 +9,6 @@ POPULATION_SIZE = 20
 
 SELECTION_PERCENT = 80
 MUTATION_PERCENT = 10
+MAX_ITERATION = 20000
+
+ITENS = [[random.randint(1, MAX_ITENS), random.randint(1, TOTAL_ITENS_BENEFIT)] for i in range(MAX_ITENS)]
