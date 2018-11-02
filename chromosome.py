@@ -24,7 +24,6 @@ class Chromosome():
         return np.array([total_size, total_benefit])
 
     def __repr__(self):
-        return "Chromosome: {} --- Fitness: {}".format(
-            self.gene,
+        return "Fitness: {}".format(
             self.fitness
         )
