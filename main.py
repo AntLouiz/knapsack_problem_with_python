@@ -19,8 +19,9 @@ from utils import (
 
 population = []
 generation = 1
+best_solution = None
 
-print("Generating a valid population...")
+print("Generating a initial valid population...")
 
 while len(population) != POPULATION_SIZE:
     gene = [random.randint(0, 1) for i in range(MAX_ITENS)]
@@ -28,8 +29,8 @@ while len(population) != POPULATION_SIZE:
 
     if chromosome_is_valid(c):
         population.append(c)
+        print(c)
 
-print("\nInitial population Generated.")
 print("Searching the solution...")
 
 while generation <= MAX_ITERATION:
@@ -62,6 +63,15 @@ while generation <= MAX_ITERATION:
         new_population[random.randint(0, MAX_ITENS - 1)] = mutate(new_population[random.randint(0, MAX_ITENS - 1)].gene)
 
     population = new_population
+
+    if (best_solution == best(population).fitness) and generation >= 20:
+        break
+    else:
+        best_solution = None
+
+    print(generation, best(population))
+
+    best_solution = best(population).fitness
 
     generation += 1
 
