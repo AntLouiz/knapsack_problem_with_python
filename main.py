@@ -20,6 +20,7 @@ from utils import (
 population = []
 generation = 1
 best_solution = None
+repeated_solution = 0
 
 print("Generating a initial valid population...")
 
@@ -33,7 +34,7 @@ while len(population) != POPULATION_SIZE:
 
 print("Searching the solution...")
 
-while generation <= MAX_ITERATION:
+while (repeated_solution <= 10):
     selected_population = []
     new_population = []
 
@@ -64,10 +65,8 @@ while generation <= MAX_ITERATION:
 
     population = new_population
 
-    if (best_solution == best(population).fitness) and generation >= 20:
-        break
-    else:
-        best_solution = None
+    if (best_solution == best(population).fitness):
+        repeated_solution += 1
 
     print(generation, best(population))
 
