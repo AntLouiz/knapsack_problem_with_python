@@ -1,4 +1,4 @@
-from settings import MAX_ITENS, ITENS
+from settings import MAX_ITENS, ITENS, BAG_SIZE
 
 
 class Chromosome():
@@ -15,6 +15,8 @@ class Chromosome():
 
     @property
     def fitness(self):
+        if self.total_size > BAG_SIZE:
+            return 0
         return self.total_size * self.total_benefit
 
     def __repr__(self):
