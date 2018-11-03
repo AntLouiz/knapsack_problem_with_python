@@ -1,5 +1,6 @@
 import random
 
+# Problem settings
 BAG_SIZE = 1000
 MAX_ITENS = 200
 TOTAL_ITENS_SIZE = 20
