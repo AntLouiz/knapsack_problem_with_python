@@ -20,21 +20,18 @@ from utils import (
 population = []
 generation = 1
 best_solution = None
-repeated_solution = 0
 
 print("Generating a initial valid population...")
 
-while len(population) != POPULATION_SIZE:
+while len(population) <= POPULATION_SIZE:
     gene = [random.randint(0, 1) for i in range(MAX_ITENS)]
     c = Chromosome(gene)
 
-    if chromosome_is_valid(c):
-        population.append(c)
-        print(c)
+    population.append(c)
 
 print("Searching the solution...")
 
-while (repeated_solution <= 10):
+while (generation < MAX_ITERATION):
     selected_population = []
     new_population = []
 
@@ -61,12 +58,9 @@ while (repeated_solution <= 10):
     population_to_mutate = int((POPULATION_SIZE * MUTATION_PERCENT) / 100)
 
     for i in range(population_to_mutate):
-        new_population[random.randint(0, MAX_ITENS - 1)] = mutate(new_population[random.randint(0, MAX_ITENS - 1)].gene)
+        new_population[random.randint(0, POPULATION_SIZE - 1)] = mutate(new_population[random.randint(0, POPULATION_SIZE - 1)].gene)
 
     population = new_population
-
-    if (best_solution == best(population).fitness):
-        repeated_solution += 1
 
     print(generation, best(population))
 

@@ -24,21 +24,15 @@ def roulette_selection(population):
 def crossover(x, y):
     son = []
 
-    while len(son) == 0:
-        binary_mask = [random.randint(0, 1) for i in range(MAX_ITENS)]
+    binary_mask = [random.randint(0, 1) for i in range(MAX_ITENS)]
 
-        for i in range(len(binary_mask)):
-            if binary_mask[i]:
-                son.append(x[i])
-            else:
-                son.append(y[i])
-
-        son = Chromosome(son)
-
-        if (son.total_size > BAG_SIZE) or (son.total_size == 0):
-            son = []
+    for i in range(len(binary_mask)):
+        if binary_mask[i]:
+            son.append(x[i])
         else:
-            break
+            son.append(y[i])
+
+    son = Chromosome(son)
 
     return son
 
@@ -53,20 +47,14 @@ def chromosome_is_valid(chromosome):
 def mutate(x):
     mutated_gene = []
 
-    while True:
-        random_gene_index = random.randint(0, MAX_ITENS - 1)
-        for i in range(MAX_ITENS):
-            if i == random_gene_index:
-                mutated_gene.append(random.randint(0, 1))
-            else:
-                mutated_gene.append(x[i])
+    random_gene_index = random.randint(0, MAX_ITENS - 1)
 
-        mutated_chromosome = Chromosome(mutated_gene)
-
-        if chromosome_is_valid(mutated_chromosome):
-            break
-
+    for i in range(MAX_ITENS):
+        if i == random_gene_index:
+            mutated_gene.append(random.randint(0, 1))
         else:
-            mutated_gene = []
+            mutated_gene.append(x[i])
+
+    mutated_chromosome = Chromosome(mutated_gene)
 
     return mutated_chromosome
