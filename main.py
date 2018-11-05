@@ -62,8 +62,6 @@ while (generation < MAX_ITERATION):
 
     population = new_population
 
-    print(generation, best(population))
-
     best_solution = best(population).fitness
 
     generation += 1
