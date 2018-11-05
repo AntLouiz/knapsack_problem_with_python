@@ -4,6 +4,7 @@ from settings import (
     MAX_ITENS,
     POPULATION_SIZE,
     SELECTION_PERCENT,
+    ELITISM_PERCENTUAL,
     MUTATION_PERCENT,
     MAX_ITERATION,
     ITENS
@@ -14,7 +15,8 @@ from utils import (
     crossover,
     chromosome_is_valid,
     mutate,
-    best
+    best,
+    get_bests
 )
 
 population = []
@@ -34,12 +36,10 @@ print("Searching the solution...")
 while (generation < MAX_ITERATION):
     selected_population = []
     new_population = []
-
-    random_selecteds_size = POPULATION_SIZE - int((POPULATION_SIZE * SELECTION_PERCENT) / 100)
-
-    for i in range(random_selecteds_size):
-        selected_population.append(population[random.randint(0, len(population) - 1)])
-
+    elitism_selecteds_size = POPULATION_SIZE - int((POPULATION_SIZE * ELITISM_PERCENTUAL) / 100)
+    new_population.extend(
+        get_bests(population, elitism_selecteds_size)
+    )
 
     for i in range(int((POPULATION_SIZE * SELECTION_PERCENT) / 100)):
         selected_population.append(roulette_selection(population))
@@ -53,7 +53,7 @@ while (generation < MAX_ITERATION):
     for x, y in selected_population:
         new_population.extend(crossover(x.gene, y.gene))
 
-
+    print(len(new_population))
     population_to_mutate = int((POPULATION_SIZE * MUTATION_PERCENT) / 100)
 
     for i in range(population_to_mutate):

@@ -8,6 +8,16 @@ def best(population):
     return max(population, key=attrgetter('fitness'))
 
 
+def get_bests(population, total):
+    bests = []
+    for t in range(total):
+        best_solution = population.index(best(population))
+
+        bests.append(population.pop(best_solution))
+
+    return bests
+
+
 def roulette_selection(population):
     population_fitness = [p.fitness for p in population]
     total_population_benefit = sum(population_fitness)
