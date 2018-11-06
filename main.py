@@ -60,9 +60,7 @@ while (generation < MAX_ITERATION):
     population = new_population
 
     best_solution = best(population).fitness
-    print(generation, best_solution)
 
     generation += 1
 
-print(ITENS)
 print(best(population).gene)
