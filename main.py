@@ -49,8 +49,9 @@ while (generation < MAX_ITERATION):
     )
 
 
-    for x, y in selected_population:
-        new_population.extend(crossover(x.gene, y.gene))
+    for x in selected_population:
+        sons = crossover(x[0].gene, x[1].gene)
+        new_population.extend(sons)
 
     population_to_mutate = int((POPULATION_SIZE * MUTATION_PERCENT) / 100)
 
@@ -60,7 +61,6 @@ while (generation < MAX_ITERATION):
     population = new_population
 
     best_solution = best(population).fitness
-
     generation += 1
 
 print(best(population).gene)
